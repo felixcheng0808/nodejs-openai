@@ -4,7 +4,7 @@ import cors from 'cors'
 import router from '@/routes'
 import { init } from '@/services/environment/environment.service'
 
-const PORT = 9001
+const PORT = 80
 const app = express()
 
 init()
