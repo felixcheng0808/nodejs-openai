@@ -14,6 +14,7 @@ const client = new Client(clientConfig)
 
 export const lineMessageHandler = async (event) => {
   let openaiRes: string
+  if (event.message.type !== 'text') return false
   const getMessage = event.message.text
   if (getMessage.startsWith("獅獅 ", 0, 3)) {
     const prompt = getMessage.slice(3)
