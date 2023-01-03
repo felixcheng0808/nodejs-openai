@@ -5,13 +5,8 @@ const configuration = new Configuration({
 })
 
 export const initOpenAI = async () => {
-  const openai = new OpenAIApi(configuration)
   try {
-    // const completion = await openai.createCompletion({
-    //   model: "text-davinci-003",
-    //   prompt: "Hello world",
-    // })
-    // console.log(completion.data.choices[0].text)
+    // TODO: something pre-work before use openai service
     console.log("[ENV] init OpenAI service complete.")
   } catch (error) {
     console.log("[ENV] init OpenAI service fail.")
@@ -19,7 +14,7 @@ export const initOpenAI = async () => {
   }
 }
 
-export const send = async (prompt: string) => {
+export const sendText = async (prompt: string) => {
   const openai = new OpenAIApi(configuration)
   const completion = await openai.createCompletion({
     model: "text-davinci-003",
@@ -28,4 +23,14 @@ export const send = async (prompt: string) => {
     max_tokens: 2048
   })
   return completion.data.choices[0].text
+}
+
+export const sendImage = async (prompt: string) => {
+  const openai = new OpenAIApi(configuration)
+  const completion = await openai.createImage({
+    prompt,
+    n: 1,
+    size: "1024x1024",
+  });
+  return completion.data.data[0].url
 }
