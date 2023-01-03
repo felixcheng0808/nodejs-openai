@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import { getVersion } from '@/services/environment/environment.service'
-import { send } from '@/services/openai.service'
+import { sendText } from '@/services/openai.service'
 import { lineMessageHandler } from '@/services/linebot.service'
 
 export const versionInfo = async (req: Request, res: Response) => {
@@ -28,7 +28,7 @@ export const sendMessage = async (req: Request, res: Response) => {
   let _res: string
   if (msg.startsWith("獅獅 ", 0, 3)) {
     const prompt = msg.slice(3)
-    _res = await send(prompt)
+    _res = await sendText(prompt)
     res.status(200).send(_res)
   } else {
     res.status(200).send('')
